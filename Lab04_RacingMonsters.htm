@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Monsters in a Race</title>
+
+        <style>
+           
+	    body {
+		background: #e0e0e0;
+		text-align: center; /* contents (like the button) are center by default */
+	    }
+
+            div {
+		margin-right: 80px; /* 80 pixels at right of div */
+		border-right: 2px solid #ff0000; /* red line at the right (destination of the race) */
+		text-align: left; /* monsters stay left at the beginning */
+	    }
+
+            img { 
+		position: relative; /* Enable the use of .style.left for positioning (during animation)*/
+            }
+
+             button {
+		font: 28px arial;
+            }
+	</style>
+	
+	<script>
+	var x1=0;
+	var x2=0;
+	var x3=0;
+	var v1,v2,v3;
+	
+	function startAnime()
+	{	
+	    document.getElementById("btnstop").disabled=false;
+	    document.getElementById("btnstart").disabled=true;
+	    v1=Math.floor(Math.random()*20)+5;
+	    v2=Math.floor(Math.random()*20)+5;
+	    v3=Math.floor(Math.random()*20)+5;
+	    idInterval=setInterval('move_one_step()',100);
+	}
+	function move_one_step()
+	{
+	 var goal=document.getElementById("track1").clientWidth;
+	 if (x1>=goal&&x1==Math.max(x1,x2,x3))
+	 {
+	    clearInterval(idInterval);    
+	    alert("monster1 win");
+	    window.location.reload(true);
+	    return;
+	 }
+	 if (x2>=goal&&x2==Math.max(x1,x2,x3))
+	 {
+	    clearInterval(idInterval);    
+	    alert("monster2 win");
+	    window.location.reload(true);
+	    return;
+	 }
+	 if (x3>=goal&&x3==Math.max(x1,x2,x3))
+	 {
+	    clearInterval(idInterval);    
+	    alert("monster3 win");
+	    window.location.reload(true);
+	    return;
+	 }
+	 x1=x1+v1;
+	 x2=x2+v2;
+	 x3=x3+v3;
+	 document.getElementById("m1").style.left=x1+"px";
+	 document.getElementById("m2").style.left=x2+"px";
+	 document.getElementById("m3").style.left=x3+"px";
+	 
+	}
+	function stopAnime()
+	{
+	    
+	    clearInterval(idInterval);
+	    document.getElementById("btnstart").disabled=false;
+	    document.getElementById("btnstop").disabled=true;
+	    
+	}
+	</script>
+
+    </head>
+
+    <body>
+	<hr/> <!-- horizontal line -->
+	
+	<div id="track1">
+	    <img src="monster1.gif" id="m1" />
+	</div>
+	<hr/> <!-- horizontal line -->
+	<div id="track2">
+	    <img src="monster2.gif" id="m2" />
+	</div>
+	<hr/> <!-- horizontal line -->
+	<div id="track3">
+	    <img src="monster3.gif" id="m3" />
+	</div>
+	<hr/> <!-- horizontal line -->
+	<hr/>
+	<button onclick="startAnime();" id="btnstart" >start</button>
+	<button onclick="stopAnime(); "id="btnstop" disabled=true>stop</button>
+	
+    </body>
+</html>
