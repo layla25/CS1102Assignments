@@ -1,2 +1,3 @@
 # CS1102Assignments
-Some interesting and html games 
+Some interesting html games
+Basic but fun :O
